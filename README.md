@@ -1,0 +1,2 @@
+# IDWebViewJavaScriptBridge
+JS与原生交互库，基于WebViewJavascriptBridge，利用addScriptMessageHandler改造
