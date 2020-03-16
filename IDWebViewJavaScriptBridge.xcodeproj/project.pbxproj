@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3EBFAF241F23340010DE3B /* IDHandlerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFA1241F23330010DE3B /* IDHandlerManager.m */; };
+		2E3EBFB0241F23340010DE3B /* IDUserMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFA4241F23330010DE3B /* IDUserMessageHandler.m */; };
+		2E3EBFB1241F23340010DE3B /* IDPageMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFA7241F23330010DE3B /* IDPageMessageHandler.m */; };
+		2E3EBFB2241F23340010DE3B /* IDPlayerMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFA8241F23330010DE3B /* IDPlayerMessageHandler.m */; };
+		2E3EBFB3241F23340010DE3B /* IDBaseMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFA9241F23330010DE3B /* IDBaseMessageHandler.m */; };
+		2E3EBFB4241F23340010DE3B /* IDSettingMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFAA241F23340010DE3B /* IDSettingMessageHandler.m */; };
+		2E3EBFB5241F23340010DE3B /* IDAppMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EBFAC241F23340010DE3B /* IDAppMessageHandler.m */; };
 		3027B1F621EF307F00D18857 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3027B1F521EF307F00D18857 /* AppDelegate.m */; };
 		3027B1F921EF308000D18857 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3027B1F821EF308000D18857 /* ViewController.m */; };
 		3027B1FE21EF308200D18857 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3027B1FD21EF308200D18857 /* Assets.xcassets */; };
@@ -40,6 +47,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E3EBFA1241F23330010DE3B /* IDHandlerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDHandlerManager.m; sourceTree = "<group>"; };
+		2E3EBFA2241F23330010DE3B /* IDUserMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDUserMessageHandler.h; sourceTree = "<group>"; };
+		2E3EBFA3241F23330010DE3B /* IDAppMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDAppMessageHandler.h; sourceTree = "<group>"; };
+		2E3EBFA4241F23330010DE3B /* IDUserMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDUserMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFA5241F23330010DE3B /* IDPlayerMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPlayerMessageHandler.h; sourceTree = "<group>"; };
+		2E3EBFA6241F23330010DE3B /* IDBaseMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDBaseMessageHandler.h; sourceTree = "<group>"; };
+		2E3EBFA7241F23330010DE3B /* IDPageMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPageMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFA8241F23330010DE3B /* IDPlayerMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPlayerMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFA9241F23330010DE3B /* IDBaseMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDBaseMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFAA241F23340010DE3B /* IDSettingMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDSettingMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFAB241F23340010DE3B /* IDHandlerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDHandlerManager.h; sourceTree = "<group>"; };
+		2E3EBFAC241F23340010DE3B /* IDAppMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDAppMessageHandler.m; sourceTree = "<group>"; };
+		2E3EBFAD241F23340010DE3B /* IDSettingMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDSettingMessageHandler.h; sourceTree = "<group>"; };
+		2E3EBFAE241F23340010DE3B /* IDPageMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPageMessageHandler.h; sourceTree = "<group>"; };
 		3027B1F121EF307F00D18857 /* IDWebViewJavaScriptBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWebViewJavaScriptBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3027B1F421EF307F00D18857 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3027B1F521EF307F00D18857 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -169,6 +190,20 @@
 				30D4514B2238FB2E00592A91 /* IDWebViewJavaScriptBridgeBase.h */,
 				30D4514C2238FB2E00592A91 /* WebViewJavascriptBridge_JS.m */,
 				30D4514D2238FB2E00592A91 /* IDWKWebViewJavascriptBridge.h */,
+				2E3EBFA3241F23330010DE3B /* IDAppMessageHandler.h */,
+				2E3EBFAC241F23340010DE3B /* IDAppMessageHandler.m */,
+				2E3EBFA6241F23330010DE3B /* IDBaseMessageHandler.h */,
+				2E3EBFA9241F23330010DE3B /* IDBaseMessageHandler.m */,
+				2E3EBFAB241F23340010DE3B /* IDHandlerManager.h */,
+				2E3EBFA1241F23330010DE3B /* IDHandlerManager.m */,
+				2E3EBFAE241F23340010DE3B /* IDPageMessageHandler.h */,
+				2E3EBFA7241F23330010DE3B /* IDPageMessageHandler.m */,
+				2E3EBFA5241F23330010DE3B /* IDPlayerMessageHandler.h */,
+				2E3EBFA8241F23330010DE3B /* IDPlayerMessageHandler.m */,
+				2E3EBFAD241F23340010DE3B /* IDSettingMessageHandler.h */,
+				2E3EBFAA241F23340010DE3B /* IDSettingMessageHandler.m */,
+				2E3EBFA2241F23330010DE3B /* IDUserMessageHandler.h */,
+				2E3EBFA4241F23330010DE3B /* IDUserMessageHandler.m */,
 			);
 			path = JSBridge;
 			sourceTree = SOURCE_ROOT;
@@ -313,12 +348,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3EBFB0241F23340010DE3B /* IDUserMessageHandler.m in Sources */,
+				2E3EBFB1241F23340010DE3B /* IDPageMessageHandler.m in Sources */,
+				2E3EBFB4241F23340010DE3B /* IDSettingMessageHandler.m in Sources */,
 				30D4514F2238FB2E00592A91 /* IDWKWebViewJavascriptBridge.m in Sources */,
+				2E3EBFB5241F23340010DE3B /* IDAppMessageHandler.m in Sources */,
 				3027B1F921EF308000D18857 /* ViewController.m in Sources */,
+				2E3EBFAF241F23340010DE3B /* IDHandlerManager.m in Sources */,
 				30D451502238FB2E00592A91 /* WebViewJavascriptBridge_JS.m in Sources */,
 				3027B20421EF308200D18857 /* main.m in Sources */,
 				3027B1F621EF307F00D18857 /* AppDelegate.m in Sources */,
+				2E3EBFB2241F23340010DE3B /* IDPlayerMessageHandler.m in Sources */,
 				30D4514E2238FB2E00592A91 /* IDWebViewJavaScriptBridgeBase.m in Sources */,
+				2E3EBFB3241F23340010DE3B /* IDBaseMessageHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

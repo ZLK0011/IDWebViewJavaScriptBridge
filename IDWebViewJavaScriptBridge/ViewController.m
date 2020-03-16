@@ -9,16 +9,20 @@
 #import "ViewController.h"
 #import <WebKit/WebKit.h>
 #import "IDWKWebViewJavascriptBridge.h"
+#import "IDHandlerManager.h"
+#import "IDUserMessageHandler.h"
+#import "IDAppMessageHandler.h"
+#import "IDPlayerMessageHandler.h"
+#import "IDPageMessageHandler.h"
+#import "IDSettingMessageHandler.h"
 
-@interface ViewController ()<WKNavigationDelegate,WKUIDelegate>{
+@interface ViewController ()<WKNavigationDelegate,WKUIDelegate,IDUserMessageHandlerProtocol,IDAppMessageHandlerProtocol,IDSettingMessageHandlerProtocol,IDPlayerMessageHandlerProtocol,IDPageMessageHandlerProtocol>{
     WKWebView *_wkWebView;
 }
 @property (strong, nonatomic) IDWKWebViewJavascriptBridge *bridge;
 @end
 
-@implementation ViewController {
-    
-}
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,47 +32,81 @@
     _wkWebView.navigationDelegate = self;
     _wkWebView.UIDelegate = self;
     [self.view addSubview:_wkWebView];
-    self.bridge = [IDWKWebViewJavascriptBridge bridgeForWebView:_wkWebView];
-    [IDWKWebViewJavascriptBridge enableLogging];
     NSURLRequest *request = [NSURLRequest requestWithURL:[[NSBundle mainBundle] URLForResource:@"test" withExtension:@"html"]];
     [_wkWebView loadRequest:request];
+    
+    [self registerMessageHandlers];
+}
 
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"echo" ofType:@"html"];
-//    NSString *HTMLString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-//    [_wkWebView loadHTMLString:HTMLString baseURL:nil];
-    
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 6*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self.bridge callHandler:@"callHandler" data:@"最美的太阳" responseCallback:^(id responseData) {
-            NSLog(@"返回数据了啊%@",responseData);
-        }];
-    });
-    
-    [self.bridge registerHander:@"share" handler:^(id data, BridgeResponseCallback responseCallback) {
-        NSMutableDictionary *args = [NSMutableDictionary dictionary];
-        
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            [args addEntriesFromDictionary:data];
-        }
-        
-        if (responseCallback) {
-            [args setObject:responseCallback forKey:@"responseCallback"];
-        }
-        [self share:data];
-    }];
-    
-    [self.bridge registerHander:@"requestLocation" handler:^(id data, BridgeResponseCallback responseCallback) {
-        NSMutableDictionary *args = [NSMutableDictionary dictionary];
-        
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            [args addEntriesFromDictionary:data];
-        }
-        
-        if (responseCallback) {
-            [args setObject:responseCallback forKey:@"responseCallback"];
-        }
-        [self requestLocation:[args copy]];
-    }];
+- (void)registerMessageHandlers {
+    self.bridge = [IDWKWebViewJavascriptBridge bridgeForWebView:_wkWebView];
+    [[IDHandlerManager sharedManager] registerAllHandlersForJSBridge:self.bridge delegate:self];
+}
+
+#pragma mark - IDUserMessageHandlerProtocol
+- (void)userMessageHandler:(NSDictionary *)args{
+    BridgeResponseCallback responseCallback = args[@"responseCallback"];
+    if (responseCallback) {
+        NSDictionary *dic = @{
+            @"code": @(0),        //请求状态码
+            @"msg": @"OK",     //请求返回信息
+            @"data": @{        //请求返回的数据
+                @"userId": @"123456",
+                @"nickname": @"口袋宝贝",
+                @"userType": @(1),
+                @"avatar": @"http://avatar.account.idaddy.cn/avatar/025/35/11/69_avatar_1575628057.jpg",
+                @"vipExpiredAt": @"2020-12-28 23:59:59",
+                @"token": @"4b04ba3f-95a7-8e25-a2f6-5e142e7bfaa9aa",
+                @"age": @"3.1",
+                @"gender":@"1"
+            }
+        };
+        responseCallback(dic);
+    }
+}
+
+- (void)userLoginMessageHandler:(NSDictionary *)args{
+    BridgeResponseCallback responseCallback = args[@"responseCallback"];
+    [self share:args];
+    if (responseCallback) {
+        NSDictionary *dic = @{
+                @"code": @(0),        //请求状态码
+                @"msg": @"OK"     //请求返回信息
+                            };
+        responseCallback(dic[@"msg"]);
+    }
+}
+
+#pragma mark - IDAppMessageHandlerProtocol
+- (void)appMessageHandler:(NSDictionary *)args{
+    NSLog(@"app----%@",args);
+}
+
+#pragma mark - IDPlayerMessageHandlerProtocol
+- (void)playerPlayMessageHandler:(NSDictionary *)args{
+    NSLog(@"player.play----%@",args);
+    BridgeResponseCallback responseCallback = args[@"responseCallback"];
+    if (responseCallback) {
+        NSDictionary *dic = @{
+                @"code": @(0),        //请求状态码
+                @"msg": @"OK"     //请求返回信息
+                            };
+        responseCallback(dic[@"msg"]);
+    }
+}
+
+- (void)playerPauseMessageHandler:(NSDictionary *)args{
+    NSLog(@"player.pause----%@",args);
+}
+
+#pragma mark - IDSettingMessageHandlerProtocol
+- (void)settingMessageHandler:(NSDictionary *)args{
+    NSLog(@"setting----%@",args);
+}
+
+#pragma mark - IDPageMessageHandlerProtocol
+- (void)pageMessageHandler:(NSDictionary *)args{
+    NSLog(@"page----%@",args);
 }
 
 // 获取地理位置信息（由JS端调用）
@@ -81,10 +119,9 @@
 
 // 分享（由JS端调用）
 - (void)share:(NSDictionary *)args {
-    NSString *shareContent = [NSString stringWithFormat:@"标题：%@\n 内容：%@ \n url：%@",
+    NSString *shareContent = [NSString stringWithFormat:@"标题：%@\n 内容：%@ \n",
                               args[@"title"],
-                              args[@"content"],
-                              args[@"url"]];
+                              args[@"content"]];
     [self showAlertViewWithTitle:@"调用原生分享菜单" message:shareContent];
 }
 
@@ -93,7 +130,7 @@
     [alertView show];
 }
 
-#pragma mark --WKNavigationDelegate
+#pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     NSLog(@"加载完成");
 }
