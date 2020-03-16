@@ -22,30 +22,22 @@
          function(bridge) {
              /* Initialize your app here */
              
-             var handlerNames = new Array("share", "requestLocation");
-             
-             for (var i in handlerNames) {
-                 var handlerName = handlerNames[i];
-                 SCApp[handlerName] = function (tempHandlerName) {
-                     return function(data, callback) {
-                         if (typeof data == "function") { // 意味着没有参数 data，只有一个参数 callback
-                             bridge.callHandler(tempHandlerName, null, data);
-                         } else if (callback == null) {  // 第二个参数 callback 为 null 或者只有第一个参数 data
-                             bridge.callHandler(tempHandlerName, data);
-                         } else {  // 两个参数都有
-                             bridge.callHandler(tempHandlerName, data, callback);
-                         }
+             var handlerName = "call";
+             SCApp[handlerName] = function (tempHandlerName) {
+                 return function(handlerName, data, callback) {
+                     if (typeof data == "function") { // 意味着没有参数 data，只有一个参数 callback
+                         bridge.callHandler(handlerName, null, data);
+                     } else if (callback == null) {  // 第二个参数 callback 为 null 或者只有第一个参数 data
+                         bridge.callHandler(handlerName, data);
+                     } else {  // 两个参数都有
+                         bridge.callHandler(handlerName, data, callback);
                      }
-                 }(handlerName);
-             };
-             
-            bridge.registerHandler("share", function(data, responseCallback) {
-                var params = {'title':'测试分享的标题','content':'测试分享的内容','url':'http://www.idaddy.cn'};
-                responseCallback(params);
-            });
+                 }
+             }(handlerName);
                                  
-            bridge.registerHandler("callHandler", function(data, responseCallback) {
-                 console.log("WebViewJavascriptBridge:callHandler for message from ObjC:", data);
+                                 
+            bridge.registerHandler("list", function(data, responseCallback) {
+                 alert(data);
                  responseCallback(data);
             });
 
@@ -81,20 +73,24 @@
     <ul class="ulrs">
         
         <li><button onclick="requestLocation();">Get Location Info</button></li>
-        <li><button onclick="share();">Share</button></li>
+        <li><button onclick="call();">Share</button></li>
         
     </ul>
     
-	<script>
+    <script>
     function requestLocation() {
-        SCApp.requestLocation(function(response) {
-                              alert(response);
-                              });
+        var params = {'uri':'http://dl.audio.idaddy.cn/a/0/n7uuh855.audio','loop':'1','duck':'1'};
+        SCApp.call("player.play",params,function(response) {
+                   alert(response);
+        });
     }
     
-    function share() {
-        var params = {'title':'测试分享的标题','content':'测试分享的内容','url':'http://www.baidu.com', 'user':{'name':'Jack', 'age':'23'}};
-        SCApp.share(params);
+    function call() {
+        var params = {'title':'测试分享的标题','content':'测试分享的内容'};
+        SCApp.call("user",params,function(response) {
+                   alert(response);
+        });
     }
-	</script>
+    </script>
 </body></html>
+
